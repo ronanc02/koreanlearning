@@ -1,0 +1,52 @@
+[
+  {
+    "body":"to get up",
+    "body_translation":"일어나다",
+    "image_url":"xxx.jpg"
+  },
+  {
+    "body":"to stretch",
+    "body_translation":"스트레칭을 하다",
+    "image_url":"xxx.jpg"
+  },
+  {
+    "body":"to take a shower",
+    "body_translation":"샤워하다",
+    "image_url":"xxx.jpg"
+  },
+  {
+    "body":"to brush one’s teeth",
+    "body_translation":"이를 닦다",
+    "image_url":"xxx.jpg"
+  },
+  {
+    "body":"to put on clothes",
+    "body_translation":"옷을 입다",
+    "image_url":"xxx.jpg"
+  },
+  {
+    "body":"to wash one’s face",
+    "body_translation":"세수하다",
+    "image_url":"xxx.jpg"
+  },
+  {
+    "body":"to shave",
+    "body_translation":"면도하다",
+    "image_url":"xxx.jpg"
+  },
+  {
+    "body":"to put on makeup",
+    "body_translation":"화장하다",
+    "image_url":"xxx.jpg"
+  },
+  {
+    "body":"to have breakfast",
+    "body_translation":"아침을 먹다",
+    "image_url":"xxx.jpg"
+  },
+  {
+    "body":"to go to work",
+    "body_translation":"출근하다",
+    "image_url":"xxx.jpg"
+  }
+]
