@@ -2,8 +2,10 @@ package com.example.koreanlearning
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -33,11 +35,16 @@ class SelectionFragment : Fragment() {
     }
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var button: Button
     private var isLinearLayoutManager = true
-
+    val action = SelectionFragmentDirections.actionSelectionFragmentToCardFragment("beginner")
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recyclerView = binding.recyclerView
+        button = binding.button
+        button.setOnClickListener() {
+            view.findNavController().navigate(action)
+        }
         chooseLayout()
     }
 
