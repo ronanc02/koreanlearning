@@ -7,8 +7,8 @@
     <fragment
         android:id="@+id/selectionFragment"
         android:name="com.example.koreanlearning.SelectionFragment"
-        android:label="fragment_selection"
-        tools:layout="@layout/fragment_selection" >
+        android:label="@string/selection_fragment"
+        tools:layout="@layout/fragment_selection">
         <action
             android:id="@+id/action_selectionFragment_to_cardFragment"
             app:destination="@id/cardFragment" />

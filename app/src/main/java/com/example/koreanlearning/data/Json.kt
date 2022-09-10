@@ -9,8 +9,8 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.io.IOException
 import java.nio.charset.Charset
 
-class Json (
-    private val context: Context
+class Json(
+    private val context: Context?
 ){
 
     fun loadkoreancategories(): List<String> {
@@ -25,7 +25,7 @@ class Json (
     fun loadJson(): String {
         val json: String?
         try {
-            val input = this.context.assets.open("a1_routine.json")
+            val input = this.context!!.assets.open("a1_routine.json")
             val size = input.available()
             val buffer = ByteArray(size)
             val charset: Charset = Charsets.UTF_8
