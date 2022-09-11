@@ -1,14 +1,22 @@
 package com.example.koreanlearning.adapter
 
 import android.content.Context
+import android.content.Intent
+import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.example.koreanlearning.MainActivity
 import com.example.koreanlearning.R
+import com.example.koreanlearning.StartActivity
 import com.example.koreanlearning.model.Section
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.NonDisposableHandle.parent
 
 /**
  * Adapter for the [RecyclerView] in [MainActivity]. Displays [Section] data object.
@@ -45,6 +53,10 @@ class ItemAdapter(
         val item = dataset[position]
         holder.textView.text = item.stringResourceId
         holder.imageView.setImageResource(item.imageResourceId)
+        holder.imageView.setOnClickListener() {
+            val intent = Intent(context, StartActivity::class.java)
+            context.startActivity(intent)
+        }
     }
 
     /**
