@@ -1,20 +1,13 @@
 package com.example.koreanlearning
 
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import android.widget.Button
-import androidx.cardview.widget.CardView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.koreanlearning.adapter.ItemAdapter
-import com.example.koreanlearning.data.Datasource
-import com.example.koreanlearning.data.Json
 import com.example.koreanlearning.databinding.FragmentCardBinding
-import com.example.koreanlearning.databinding.FragmentSelectionBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,6 +42,8 @@ class CardFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        updateWordOnScreen()
+        showDialog()
     }
 
     override fun onDestroyView() {
@@ -60,4 +55,17 @@ class CardFragment : Fragment() {
         binding.textView.text = viewModel.koreanword
     }
 
+    private fun showDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.congratulations))
+            .setMessage("You did it !")
+            .setCancelable(true)
+            .setNegativeButton("exit") {_, _ ->
+                //exitgame()
+            }
+            .setPositiveButton("more") {_, _ ->
+                //restartgame()
+            }
+            .show()
+    }
 }

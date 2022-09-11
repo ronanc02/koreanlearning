@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Koreanlearning">
         <activity
-            android:name=".MainActivity"
+            android:name=".StartActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Koreanlearning.ActionBar">
@@ -20,6 +20,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".MainActivity"
+        />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>
