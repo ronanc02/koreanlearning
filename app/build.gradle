@@ -30,6 +30,9 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+        freeCompilerArgs += [
+                "-Xjvm-default=all",
+        ]
     }
     buildFeatures {
         viewBinding true
@@ -57,6 +60,9 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 // ViewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+
+// LiveData
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
 
     //Room
     implementation "androidx.room:room-runtime:$room_version"
