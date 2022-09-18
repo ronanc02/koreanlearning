@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.koreanlearning.MainActivity
 import com.example.koreanlearning.R
 import com.example.koreanlearning.StartActivity
+import com.example.koreanlearning.database.login.Login
 import com.example.koreanlearning.model.Section
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.NonDisposableHandle.parent
@@ -23,7 +24,8 @@ import kotlinx.coroutines.NonDisposableHandle.parent
  */
 class ItemAdapter(
     private val context: Context,
-    private val dataset: List<Section>
+    private val dataset: List<Section>,
+    private val logindata: List<Login>
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     // Provide a reference to the views for each data item
@@ -51,7 +53,8 @@ class ItemAdapter(
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        holder.textView.text = item.stringResourceId
+        val item2 = logindata[1]
+        holder.textView.text = item2.username
         holder.imageView.setImageResource(item.imageResourceId)
         holder.imageView.setOnClickListener() {
             val intent = Intent(context, StartActivity::class.java)

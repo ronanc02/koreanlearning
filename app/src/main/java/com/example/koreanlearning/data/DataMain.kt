@@ -1,12 +1,15 @@
 package com.example.koreanlearning.data
 
 import android.content.Context
+import com.example.koreanlearning.LoginApplication
 import com.example.koreanlearning.R
 import com.example.koreanlearning.model.Section
 
 class DataMain (
     private val context: Context?
         ){
+
+ //   private val act = LoginApplication
 
     fun loadAffirmations() : List<Section> {
         return listOf(
