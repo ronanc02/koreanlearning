@@ -6,16 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.koreanlearning.databinding.FragmentCardBinding
+import com.example.koreanlearning.databinding.FragmentSubselectionBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-class CardFragment : Fragment() {
+class SubselectionFragment : Fragment() {
 
     private val viewModel: CardViewModel by viewModels()
-    private var _binding: FragmentCardBinding? = null
+    private var _binding: FragmentSubselectionBinding? = null
     private val binding get() = _binding!!
 
     companion object {
@@ -36,7 +36,7 @@ class CardFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCardBinding.inflate(inflater, container, false)
+        _binding = FragmentSubselectionBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
     }
@@ -52,7 +52,8 @@ class CardFragment : Fragment() {
     }
 
     private fun updateWordOnScreen() {
-        binding.textView.text = viewModel.koreanword
+//        binding.textView.text = viewModel.koreanword
+        binding.textView.text = level
     }
 
     private fun showDialog() {

@@ -10,14 +10,14 @@
         android:label="@string/selection_fragment"
         tools:layout="@layout/fragment_selection">
         <action
-            android:id="@+id/action_selectionFragment_to_cardFragment"
-            app:destination="@id/cardFragment" />
+            android:id="@+id/action_selectionFragment_to_subselectionFragment"
+            app:destination="@id/subselectionFragment" />
     </fragment>
     <fragment
-        android:id="@+id/cardFragment"
-        android:name="com.example.koreanlearning.CardFragment"
+        android:id="@+id/subselectionFragment"
+        android:name="com.example.koreanlearning.SubselectionFragment"
         android:label="fragment_card"
-        tools:layout="@layout/fragment_card" >
+        tools:layout="@layout/fragment_subselection" >
         <argument
             android:name="level"
             app:argType="string" />

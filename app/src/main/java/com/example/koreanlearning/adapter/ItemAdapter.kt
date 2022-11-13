@@ -10,9 +10,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.startActivity
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.koreanlearning.MainActivity
 import com.example.koreanlearning.R
+import com.example.koreanlearning.SelectionFragmentDirections
 import com.example.koreanlearning.StartActivity
 import com.example.koreanlearning.database.login.Login
 import com.example.koreanlearning.model.Section
@@ -32,6 +34,7 @@ class ItemAdapter(
     // Complex data items may need more than one view per item, and
     // you provide access to all the views for a data item in a view holder.
     // Each data item is just an Affirmation object.
+
     class ItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.item_title)
         val imageView: ImageView = view.findViewById(R.id.item_image)
@@ -53,13 +56,21 @@ class ItemAdapter(
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-        val item2 = logindata[1]
+/*        val item2 = logindata[1]
         holder.textView.text = item2.username
+*/
+        holder.textView.text = item.stringResourceId
         holder.imageView.setImageResource(item.imageResourceId)
+
+        val action = SelectionFragmentDirections.actionSelectionFragmentToSubselectionFragment(item.stringResourceId)
         holder.imageView.setOnClickListener() {
-            val intent = Intent(context, StartActivity::class.java)
-            context.startActivity(intent)
+            it.findNavController().navigate(action)
         }
+
+//        holder.imageView.setOnClickListener() {
+//           val intent = Intent(context, StartActivity::class.java)
+//            context.startActivity(intent)
+//        }
     }
 
     /**
