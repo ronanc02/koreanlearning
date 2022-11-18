@@ -22,7 +22,7 @@ class StartActivity : AppCompatActivity()  {
         }
 
         signup.setOnClickListener() {
-            val intent = Intent(this@StartActivity, MainActivity::class.java)
+            val intent = Intent(this@StartActivity, AboutKoreaActivity::class.java)
             startActivity(intent)
         }
 

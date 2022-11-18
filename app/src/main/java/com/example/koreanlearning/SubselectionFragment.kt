@@ -43,7 +43,7 @@ class SubselectionFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         updateWordOnScreen()
-        showDialog()
+//        showDialog()
     }
 
     override fun onDestroyView() {

@@ -11,4 +11,8 @@
     <color name="blue_500">#FF2196F3</color>
     <color name="blue_700">#FF1976D2</color>
 
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
 </resources>

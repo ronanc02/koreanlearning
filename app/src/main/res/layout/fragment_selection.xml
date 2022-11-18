@@ -13,6 +13,8 @@
         android:layout_height="match_parent"
         android:scrollbars="vertical"
         app:columnCount="1"
-        app:layoutManager="GridLayoutManager" />
+        app:layoutManager="GridLayoutManager" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>
