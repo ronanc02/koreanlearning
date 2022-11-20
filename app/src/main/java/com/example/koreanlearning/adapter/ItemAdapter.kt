@@ -12,10 +12,7 @@ import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.koreanlearning.MainActivity
-import com.example.koreanlearning.R
-import com.example.koreanlearning.SelectionFragmentDirections
-import com.example.koreanlearning.StartActivity
+import com.example.koreanlearning.*
 import com.example.koreanlearning.database.login.Login
 import com.example.koreanlearning.model.Section
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -62,15 +59,18 @@ class ItemAdapter(
         holder.textView.text = item.stringResourceId
         holder.imageView.setImageResource(item.imageResourceId)
 
-        val action = SelectionFragmentDirections.actionSelectionFragmentToSubselectionFragment(item.stringResourceId)
-        holder.imageView.setOnClickListener() {
-            it.findNavController().navigate(action)
+        if (position != 3) {
+            val action =
+                SelectionFragmentDirections.actionSelectionFragmentToSubselectionFragment(item.stringResourceId)
+            holder.imageView.setOnClickListener() {
+                it.findNavController().navigate(action)
+            }
+        } else {
+            holder.imageView.setOnClickListener() {
+                val intent = Intent(context, AboutKoreaActivity::class.java)
+                context.startActivity(intent)
+            }
         }
-
-//        holder.imageView.setOnClickListener() {
-//           val intent = Intent(context, StartActivity::class.java)
-//            context.startActivity(intent)
-//        }
     }
 
     /**

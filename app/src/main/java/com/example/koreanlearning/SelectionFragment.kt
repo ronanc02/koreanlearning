@@ -12,8 +12,7 @@ import com.example.koreanlearning.databinding.FragmentSelectionBinding
 import com.example.koreanlearning.viewmodels.LoginViewModel
 import com.example.koreanlearning.viewmodels.LoginViewModelFactory
 
-class SelectionFragment(
-) : androidx.fragment.app.Fragment() {
+class SelectionFragment() : androidx.fragment.app.Fragment() {
 
     private var _binding: FragmentSelectionBinding? = null
     private val binding get() = _binding!!
