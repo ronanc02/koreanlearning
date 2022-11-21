@@ -21,5 +21,13 @@
         <argument
             android:name="level"
             app:argType="string" />
+        <action
+            android:id="@+id/action_subselectionFragment_to_aboutKoreaFragment"
+            app:destination="@id/aboutKoreaFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutKoreaFragment"
+        android:name="com.example.koreanlearning.AboutKoreaFragment"
+        android:label="fragment_about_korea"
+        tools:layout="@layout/fragment_about_korea" />
 </navigation>

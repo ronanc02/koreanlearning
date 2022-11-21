@@ -53,7 +53,10 @@ class AboutKoreaFragment : Fragment() {
             }
 
             // for API < 21
-            override fun shouldInterceptRequest(view: WebView, url: String): WebResourceResponse? {
+            override fun shouldInterceptRequest(
+                view: WebView,
+                url: String
+            ): WebResourceResponse? {
                 return assetLoader.shouldInterceptRequest(Uri.parse(url))
             }
         }

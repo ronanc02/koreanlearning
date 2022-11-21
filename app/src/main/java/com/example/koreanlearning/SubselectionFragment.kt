@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import com.example.koreanlearning.databinding.FragmentSubselectionBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -42,6 +43,13 @@ class SubselectionFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val button = binding.buttonSelection
+        val action =
+            SubselectionFragmentDirections.actionSubselectionFragmentToAboutKoreaFragment()
+
+        button.setOnClickListener() {
+            it.findNavController().navigate(action)
+        }
         updateWordOnScreen()
 //        showDialog()
     }
