@@ -1,12 +1,13 @@
 package com.example.koreanlearning
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.koreanlearning.adapter.ItemAdapter
+import com.example.koreanlearning.data.DataSelection
 import com.example.koreanlearning.databinding.FragmentSubselectionBinding
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -15,21 +16,15 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SubselectionFragment : Fragment() {
 
-    private val viewModel: CardViewModel by viewModels()
     private var _binding: FragmentSubselectionBinding? = null
     private val binding get() = _binding!!
 
-    companion object {
-        val LEVEL = "level"
-    }
+    private var fragmentname: String = "SubselectionFragment"
 
-    private lateinit var level: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            level = it.getString(LEVEL).toString()
-        }
+        setHasOptionsMenu(true)
     }
 
     override fun onCreateView(
@@ -38,30 +33,54 @@ class SubselectionFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSubselectionBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        return binding.root
     }
+
+    private lateinit var recyclerView: RecyclerView
+    private var isLinearLayoutManager = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val button = binding.buttonSelection
-        val action =
-            SubselectionFragmentDirections.actionSubselectionFragmentToAboutKoreaFragment()
-
-        button.setOnClickListener() {
-            it.findNavController().navigate(action)
-        }
-        updateWordOnScreen()
-//        showDialog()
+        recyclerView = binding.rwSubselection
+        implementLayout()
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    private fun updateWordOnScreen() {
-//        binding.textView.text = viewModel.koreanword
-        binding.textView.text = level
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+
+        val layoutButton = menu.findItem(R.id.action_settings)
+        setIcon(layoutButton)
+    }
+
+    private fun implementLayout() {
+        val dataMain = context?.let { DataSelection(it).loadSections() }
+        recyclerView.layoutManager = GridLayoutManager(context, 1)
+        recyclerView.adapter = dataMain?.let { context?.let { it1 -> ItemAdapter(it1, it, fragmentname) } }
+
+        recyclerView.setHasFixedSize(true)
+    }
+
+    private fun setIcon(menuItem: MenuItem?) {
+        if (menuItem == null)
+            return
+
+        menuItem.icon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_grid_layout)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_settings -> {
+                setIcon(item)
+                return true
+            }
+
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     private fun showDialog() {

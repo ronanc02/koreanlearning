@@ -22,6 +22,7 @@ class SelectionFragment() : androidx.fragment.app.Fragment() {
         )
     }
 
+    private var fragmentname: String = "SelectionFragment"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +43,7 @@ class SelectionFragment() : androidx.fragment.app.Fragment() {
     private var isLinearLayoutManager = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = binding.recyclerView
+        recyclerView = binding.rwSelection
         implementLayout()
     }
 
@@ -62,7 +63,8 @@ class SelectionFragment() : androidx.fragment.app.Fragment() {
 //        val json = context?.let { Json(it).parseJson() }
         val dataMain = context?.let { DataSelection(it).loadCategories() }
         recyclerView.layoutManager = GridLayoutManager(context, 1)
-        recyclerView.adapter = dataMain?.let { context?.let { it1 -> ItemAdapter(it1, it, viewModel.fullLogin()) } }
+//        recyclerView.adapter = dataMain?.let { context?.let { it1 -> ItemAdapter(it1, it, viewModel.fullLogin()) } }
+        recyclerView.adapter = dataMain?.let { context?.let { it1 -> ItemAdapter(it1, it, fragmentname) } }
 
         recyclerView.setHasFixedSize(true)
     }

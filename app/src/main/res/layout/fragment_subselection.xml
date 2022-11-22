@@ -3,19 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SubselectionFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/textView"
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rw_subselection"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/korean_word" />
+        android:scrollbars="vertical"
+        app:columnCount="1"
+        app:layoutManager="GridLayoutManager" >
 
-    <Button
-        android:id="@+id/buttonSelection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+    </androidx.recyclerview.widget.RecyclerView>
 
 </FrameLayout>

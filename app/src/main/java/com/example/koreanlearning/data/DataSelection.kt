@@ -20,6 +20,15 @@ class DataSelection (
         )
     }
 
+    fun loadSections() : List<Section> {
+        return listOf(
+            Section("section1", R.drawable.aboutkorea),
+            Section("section2", R.drawable.learningkorean),
+            Section("section3", R.drawable.quizzes),
+            Section("section4", R.drawable.games)
+        )
+    }
+
     fun loadLevelsLearning() : List<Section> {
         return listOf(
             Section("Alphabet", R.drawable.quizzes),

@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebViewClient
 import androidx.webkit.WebViewAssetLoader
 import com.example.koreanlearning.databinding.FragmentAboutKoreaBinding
 import android.webkit.WebView
@@ -20,12 +19,24 @@ import androidx.annotation.RequiresApi
 import androidx.webkit.WebViewClientCompat
 
 
-
-
 class AboutKoreaFragment : Fragment() {
 
     private var _binding: FragmentAboutKoreaBinding? = null
     private val binding get() = _binding!!
+
+    companion object {
+        val SECTION = "section"
+    }
+
+    private lateinit var section: String
+
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            section = it.getString(AboutKoreaFragment.SECTION).toString()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,7 +75,7 @@ class AboutKoreaFragment : Fragment() {
 //        webView.webViewClient = WebViewClient()
 //        webView.settings.allowFileAccess = true
 //        webView.settings.allowContentAccess = true
-        webView.loadUrl("https://appassets.androidplatform.net/assets/aboutKoreaWebView/section1.html")
+        webView.loadUrl("https://appassets.androidplatform.net/assets/aboutKoreaWebView/$section.html")
 
 //        webView.settings.javaScriptEnabled = true
     }

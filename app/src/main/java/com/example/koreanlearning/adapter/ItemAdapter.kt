@@ -24,7 +24,7 @@ import kotlinx.coroutines.NonDisposableHandle.parent
 class ItemAdapter(
     private val context: Context,
     private val dataset: List<Section>,
-    private val logindata: List<Login>
+    private val fragmentname: String
 ) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     // Provide a reference to the views for each data item
@@ -59,19 +59,31 @@ class ItemAdapter(
         holder.textView.text = item.stringResourceId
         holder.imageView.setImageResource(item.imageResourceId)
 
-        if (position != 3) {
-            val action =
-                SelectionFragmentDirections.actionSelectionFragmentToSubselectionFragment(item.stringResourceId)
-            holder.imageView.setOnClickListener() {
-                it.findNavController().navigate(action)
+        when (fragmentname) {
+            "SelectionFragment" -> {
+                val action =
+                    SelectionFragmentDirections.actionSelectionFragmentToSubselectionFragment(
+                        item.stringResourceId
+                    )
+                holder.imageView.setOnClickListener() {
+                    it.findNavController().navigate(action)
+                }
             }
-        } else {
-            holder.imageView.setOnClickListener() {
-                val intent = Intent(context, AboutKoreaActivity::class.java)
-                context.startActivity(intent)
+            "SubselectionFragment" -> {
+                val action =
+                    SubselectionFragmentDirections.actionSubselectionFragmentToAboutKoreaFragment(
+                        item.stringResourceId
+                    )
+                holder.imageView.setOnClickListener() {
+                    it.findNavController().navigate(action)
+                }
+            }
+            else -> {
+//                val intent = Intent(context, AboutKoreaActivity::class.java)
+//                context.startActivity(intent)
+                }
             }
         }
-    }
 
     /**
      * Return the size of your dataset (invoked by the layout manager)
