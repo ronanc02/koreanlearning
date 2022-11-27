@@ -53,25 +53,42 @@ class ItemAdapter(
      */
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = dataset[position]
-/*        val item2 = logindata[1]
-        holder.textView.text = item2.username
-*/
         holder.textView.text = item.stringResourceId
         holder.imageView.setImageResource(item.imageResourceId)
 
         when (fragmentname) {
             "SelectionFragment" -> {
+                when (item.stringResourceId) {
+                    "Quizzes" -> {
+                        val action =
+                            SelectionFragmentDirections.actionSelectionFragmentToSubselectionQuizFragment()
+                        holder.imageView.setOnClickListener() {
+                            it.findNavController().navigate(action)
+                        }
+                    }
+                    else -> {
+                        val action =
+                            SelectionFragmentDirections.actionSelectionFragmentToSubselectionFragment(
+                                item.stringResourceId
+                            )
+                        holder.imageView.setOnClickListener() {
+                            it.findNavController().navigate(action)
+                        }
+                    }
+                }
+            }
+            "SubselectionFragment" -> {
                 val action =
-                    SelectionFragmentDirections.actionSelectionFragmentToSubselectionFragment(
+                    SubselectionFragmentDirections.actionSubselectionFragmentToAboutKoreaFragment(
                         item.stringResourceId
                     )
                 holder.imageView.setOnClickListener() {
                     it.findNavController().navigate(action)
                 }
             }
-            "SubselectionFragment" -> {
+            "SubselectionLearningFragment" -> {
                 val action =
-                    SubselectionFragmentDirections.actionSubselectionFragmentToAboutKoreaFragment(
+                    SubselectionQuizFragmentDirections.actionSubselectionQuizFragmentToQuizFragment(
                         item.stringResourceId
                     )
                 holder.imageView.setOnClickListener() {

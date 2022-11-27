@@ -3,26 +3,22 @@ package com.example.koreanlearning
 import android.os.Bundle
 import android.view.*
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.koreanlearning.adapter.ItemAdapter
 import com.example.koreanlearning.data.DataSelection
-import com.example.koreanlearning.databinding.FragmentSelectionBinding
-import com.example.koreanlearning.viewmodels.LoginViewModel
-import com.example.koreanlearning.viewmodels.LoginViewModelFactory
+import com.example.koreanlearning.databinding.FragmentSubselectionQuizBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
-class SelectionFragment() : androidx.fragment.app.Fragment() {
 
-    private var _binding: FragmentSelectionBinding? = null
+class SubselectionQuizFragment : Fragment() {
+
+    private var _binding: FragmentSubselectionQuizBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: LoginViewModel by activityViewModels {
-        LoginViewModelFactory(
-            (activity?.application as LoginApplication).database.loginDao()
-        )
-    }
 
-    private var fragmentname: String = "SelectionFragment"
+    private var fragmentname: String = "SubselectionLearningFragment"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,18 +30,18 @@ class SelectionFragment() : androidx.fragment.app.Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSelectionBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+        _binding = FragmentSubselectionQuizBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     private lateinit var recyclerView: RecyclerView
     private var isLinearLayoutManager = true
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = binding.rwSelection
+        recyclerView = binding.rwSubselectionlearning
         implementLayout()
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -60,7 +56,7 @@ class SelectionFragment() : androidx.fragment.app.Fragment() {
     }
 
     private fun implementLayout() {
-        val dataMain = context?.let { DataSelection(it).loadCategories() }
+        val dataMain = context?.let { DataSelection(it).loadLevelsLearning() }
         recyclerView.layoutManager = GridLayoutManager(context, 1)
         recyclerView.adapter = dataMain?.let { context?.let { it1 -> ItemAdapter(it1, it, fragmentname) } }
 
@@ -83,5 +79,19 @@ class SelectionFragment() : androidx.fragment.app.Fragment() {
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showDialog() {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(getString(R.string.congratulations))
+            .setMessage("You did it !")
+            .setCancelable(true)
+            .setNegativeButton("exit") {_, _ ->
+                //exitgame()
+            }
+            .setPositiveButton("more") {_, _ ->
+                //restartgame()
+            }
+            .show()
     }
 }

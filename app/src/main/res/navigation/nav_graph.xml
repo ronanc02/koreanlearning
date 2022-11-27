@@ -12,6 +12,9 @@
         <action
             android:id="@+id/action_selectionFragment_to_subselectionFragment"
             app:destination="@id/subselectionFragment" />
+        <action
+            android:id="@+id/action_selectionFragment_to_subselectionQuizFragment"
+            app:destination="@id/subselectionQuizFragment" />
     </fragment>
     <fragment
         android:id="@+id/subselectionFragment"
@@ -34,4 +37,22 @@
         android:name="section"
         app:argType="string" />
     </fragment>
+    <fragment
+        android:id="@+id/subselectionQuizFragment"
+        android:name="com.example.koreanlearning.SubselectionQuizFragment"
+        android:label="fragment_subselection_quiz"
+        tools:layout="@layout/fragment_subselection_quiz">
+        <action
+            android:id="@+id/action_subselectionQuizFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.example.koreanlearning.QuizFragment"
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" >
+    <argument
+        android:name="quiz"
+        app:argType="string" />
+</fragment>
 </navigation>

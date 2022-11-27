@@ -1,31 +1,28 @@
 package com.example.koreanlearning.data
 
 import android.content.Context
+import android.os.ParcelFileDescriptor.open
+import com.example.koreanlearning.R
 import com.example.koreanlearning.model.Jsonkorean
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.io.IOException
+import java.nio.channels.FileChannel.open
 import java.nio.charset.Charset
 
+
 class Json(
-    private val context: Context?
+    private val context: Context
 ){
+    //   val context: Context = getApplicationContext()
 
-    fun loadkoreancategories(): List<String> {
-        return listOf<String>(
-            "beginner",
-            "intermediate",
-            "advanced",
-            "bonus"
-        )
-    }
-
-    fun loadJson(): String {
+    fun loadJson(words : String): String {
         val json: String?
         try {
-            val input = this.context!!.assets.open("a1_routine.json")
+            val input = context.assets.open(words)
+
             val size = input.available()
             val buffer = ByteArray(size)
             val charset: Charset = Charsets.UTF_8
@@ -39,14 +36,14 @@ class Json(
         return json
     }
 
-    fun parseJson() : List<Jsonkorean>? {
+    fun parseJson(koreanwords: String) : List<Jsonkorean>? {
         val moshi: Moshi = Moshi.Builder()
             .addLast(KotlinJsonAdapterFactory())
             .build()
         val listwords = Types.newParameterizedType(List::class.java, Jsonkorean::class.java)
         val adapter: JsonAdapter<List<Jsonkorean>> = moshi.adapter(listwords)
 
-        val korean = adapter.fromJson(loadJson())
+        val korean = adapter.fromJson(loadJson("a1_routine.json"))
 
         return korean
     }

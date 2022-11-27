@@ -48,5 +48,14 @@ class DataSelection (
         )
     }
 
+    fun loadkoreancategories(): List<String> {
+        return listOf<String>(
+            "beginner",
+            "intermediate",
+            "advanced",
+            "bonus"
+        )
+    }
+
 
 }
