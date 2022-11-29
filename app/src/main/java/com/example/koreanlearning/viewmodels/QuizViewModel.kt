@@ -1,13 +1,18 @@
 package com.example.koreanlearning.viewmodels;
 
+import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel;
+import com.example.koreanlearning.data.DataSelection
 import com.example.koreanlearning.data.Json
 import com.example.koreanlearning.model.Jsonkorean
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.security.AccessController.getContext
+import javax.inject.Inject
 
-class QuizViewModel(private val context: Context) : ViewModel(
+@HiltViewModel
+class QuizViewModel @Inject constructor(application: Application) : ViewModel(
 ) {
 
     private var _score = 0
@@ -18,18 +23,17 @@ class QuizViewModel(private val context: Context) : ViewModel(
     val currentWordCount: Int
         get() = _currentWordCount
 
-    private lateinit var _currentScrambledWord: String
-    val currentScrambledWord: String
-        get() = _currentScrambledWord
-
     // List of words used in the game
 //    private var wordsList: MutableList<String> = mutableListOf()
     private var wordsList: List<Jsonkorean>
-    private lateinit var currentWord: String
+
+    private lateinit var _currentWord: String
+    val currentWord: String
+        get() = _currentWord
 
     init {
         Log.d("GameFragment", "GameViewModel created!")
-        wordsList = Json(context).parseJson("jsonfile")!!.shuffled()
+        wordsList = Json(application.applicationContext).parseJson("jsonfile")!!.shuffled()
         getNextWord()
     }
 
@@ -43,7 +47,7 @@ class QuizViewModel(private val context: Context) : ViewModel(
     */
 
     private fun getNextWord() {
-        currentWord = wordsList[_currentWordCount].body
+        _currentWord = wordsList[_currentWordCount].body
         ++_currentWordCount
     }
 

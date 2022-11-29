@@ -1,13 +1,10 @@
 package com.example.koreanlearning.data
 
 import android.content.Context
-import com.example.koreanlearning.LoginApplication
 import com.example.koreanlearning.R
 import com.example.koreanlearning.model.Section
 
-class DataSelection (
-    private val context: Context?
-        ){
+class DataSelection(private val context: Context) {
 
  //   private val act = LoginApplication
 

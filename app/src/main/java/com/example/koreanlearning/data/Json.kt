@@ -8,20 +8,19 @@ import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.io.File
 import java.io.IOException
+import java.lang.reflect.Array.get
 import java.nio.channels.FileChannel.open
 import java.nio.charset.Charset
 
 
-class Json(
-    private val context: Context
-){
-    //   val context: Context = getApplicationContext()
+class Json (private val context: Context){
 
     fun loadJson(words : String): String {
         val json: String?
         try {
-            val input = context.assets.open(words)
+            val input = context.assets.open("a1_routine.json")
 
             val size = input.available()
             val buffer = ByteArray(size)
