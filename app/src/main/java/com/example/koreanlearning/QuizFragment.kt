@@ -20,6 +20,7 @@ class QuizFragment : Fragment() {
 
     // Binding object instance with access to the views in the game_fragment.xml layout
     private lateinit var binding: FragmentQuizBinding
+    private lateinit var selectedChoice: String
 
     // Create a ViewModel the first time the fragment is created.
     // If the fragment is re-created, it receives the same GameViewModel instance created by the
@@ -40,14 +41,26 @@ class QuizFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Setup a click listener for the Submit and Skip buttons.
-        binding.submit.setOnClickListener { onSubmitWord() }
+        // Setup a click listener for the Choices, Submit and Skip buttons.
+        binding.choicea.setOnClickListener { selectedChoice = binding.choicea.text.toString()}
+        binding.choiceb.setOnClickListener { selectedChoice = binding.choiceb.text.toString()}
+        binding.choicec.setOnClickListener { selectedChoice = binding.choicec.text.toString()}
+        binding.choiced.setOnClickListener { selectedChoice = binding.choiced.text.toString()}
+
+        binding.submit.setOnClickListener { onSelectWord() }
         binding.skip.setOnClickListener { onSkipWord() }
+
         // Update the UI
         updateNextWordOnScreen()
-        binding.score.text = getString(R.string.score, 0)
-        binding.wordCount.text = getString(
-            R.string.word_count, 0, 10)
+        viewModel.score.observe(viewLifecycleOwner,
+            { newScore ->
+                binding.score.text = getString(R.string.score, newScore)
+            })
+        viewModel.currentWordCount.observe(viewLifecycleOwner,
+            { newWordCount ->
+            binding.wordCount.text = getString(
+            R.string.word_count, newWordCount, 10)
+            })
     }
 
     /*
@@ -55,10 +68,9 @@ class QuizFragment : Fragment() {
     * Displays the next scrambled word.
     * After the last word, the user is shown a Dialog with the final score.
     */
-    private fun onSubmitWord() {
-        val playerWord = binding.textInputEditText.text.toString()
+    private fun onSelectWord() {
 
-        if (viewModel.isUserWordCorrect(playerWord)) {
+        if (viewModel.isUserWordCorrect(selectedChoice)) {
             setErrorTextField(false)
             if (viewModel.nextWord()) {
                 updateNextWordOnScreen()
@@ -97,7 +109,7 @@ class QuizFragment : Fragment() {
     private fun showFinalScoreDialog() {
         MaterialAlertDialogBuilder(requireContext())
             .setTitle(getString(R.string.congratulations))
-            .setMessage(getString(R.string.you_scored, viewModel.score))
+            .setMessage(getString(R.string.you_scored, viewModel.score.value))
             .setCancelable(false)
             .setNegativeButton(getString(R.string.exit)) { _, _ ->
                 exitGame()
@@ -134,19 +146,24 @@ class QuizFragment : Fragment() {
     * Sets and resets the text field error status.
     */
     private fun setErrorTextField(error: Boolean) {
-        if (error) {
+/*        if (error) {
             binding.textField.isErrorEnabled = true
             binding.textField.error = getString(R.string.try_again)
         } else {
             binding.textField.isErrorEnabled = false
             binding.textInputEditText.text = null
         }
-    }
+*/    }
 
     /*
      * Displays the next scrambled word on screen.
      */
     private fun updateNextWordOnScreen() {
-        binding.textViewUnscrambledWord.text = viewModel.currentWord
+        binding.textViewKoreanWord.text = viewModel.currentWord
+        binding.choicea.text = viewModel.currentChoices[0]
+        binding.choiceb.text = viewModel.currentChoices[1]
+        binding.choicec.text = viewModel.currentChoices[2]
+        binding.choiced.text = viewModel.currentChoices[3]
+
     }
 }
